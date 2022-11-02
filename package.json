@@ -1,10 +1,10 @@
 {
-  "name": "moonpig-tech-test-node-backend",
+  "name": "tech-test-node-backend",
   "version": "0.1.0",
-  "description": "Mooonpig Node Backend Technical Test",
+  "description": "Node Backend Technical Test",
   "main": "index.js",
-  "repository": "https://github.com/Moonpig/tech-test-node-backend",
-  "author": "Moonpig",
+  "repository": "https://github.com/vernonm-emac/nc-tech-test",
+  "author": "EMaC",
   "license": "UNLICENSED",
   "private": true,
   "devDependencies": {
