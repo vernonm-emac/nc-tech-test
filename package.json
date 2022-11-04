@@ -24,7 +24,7 @@
     "express": "^4.17.1"
   },
   "scripts": {
-    "dev": "nodemon src/index.ts",
+    "start": "nodemon src/index.ts",
     "test": "jest --watch"
   }
 }
