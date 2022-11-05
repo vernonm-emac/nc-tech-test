@@ -1,4 +1,4 @@
-const { getCards } = require("./controller/cards.controller");
+const { getCards, getCardById } = require("./controller/cards.controller");
 
 const express = require("express");
 const app = express();
@@ -7,9 +7,7 @@ app.set("json spaces", 2);
 
 app.get("/cards", getCards);
 
-app.get("/cards/:cardId/:sizeId?", () => {
-  // respond with card by id
-});
+app.get("/cards/:cardId", getCardById);
 
 app.use("*", (req, res) => {
   res.status(404).send({

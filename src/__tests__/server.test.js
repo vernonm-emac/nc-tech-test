@@ -1,19 +1,8 @@
 const request = require("supertest");
 const app = require("../server");
 
-// test("returns matching card title", async () => {
-//   const response = await request(app).get("/cards/card001");
-
-//   expect(response.status).toBe(200);
-//   expect(response.body).toEqual(
-//     expect.objectContaining({
-//       title: "card 1 title",
-//     })
-//   );
-// });
-
 describe("GET /cards", () => {
-  test("200 :returns all card", () => {
+  test("200 :returns all cards with exact length", () => {
     const cards = [
       {
         title: "card 1 title",
@@ -36,6 +25,8 @@ describe("GET /cards", () => {
       .expect(200)
       .then((res) => {
         expect(res.body).toEqual({ cards });
+
+        expect(res.body.cards.length).toBe(3);
       });
   });
 
@@ -89,6 +80,89 @@ describe("GET /cards", () => {
       .expect(400)
       .then(({ body }) => {
         expect(body.message).toBe("No cards found !!!");
+      });
+  });
+});
+
+describe("GET /cards/:Id", () => {
+  test("200 :return single card when correct id is passed", () => {
+    const singleCard = {
+      title: "card 1 title",
+      imageUrl: "/front-cover-portrait-1.jpg",
+      card_id: "card001",
+      base_price: 200,
+      availableSizes: [
+        {
+          id: "sm",
+        },
+        {
+          id: "md",
+        },
+        {
+          id: "gt",
+        },
+      ],
+      pages: [
+        {
+          title: "Front Cover",
+          templateId: "template001",
+        },
+        {
+          title: "Inside Left",
+          templateId: "template002",
+        },
+        {
+          title: "Inside Right",
+          templateId: "template003",
+        },
+        {
+          title: "Back Cover",
+          templateId: "template004",
+        },
+      ],
+    };
+    return request(app)
+      .get("/cards/card001")
+      .expect(200)
+      .then((res) => {
+        expect(res.body).toEqual({ card: singleCard });
+      });
+  });
+
+  test("200 : returns matching card title", async () => {
+    return request(app)
+      .get("/cards/card001")
+      .expect(200)
+      .then(({ body: { card } }) => {
+        expect(card).toEqual(
+          expect.objectContaining({
+            title: "card 1 title",
+          })
+        );
+      });
+  });
+  test("200 : returns exact property count in a card object", async () => {
+    return request(app)
+      .get("/cards/card001")
+      .expect(200)
+      .then(({ body: { card } }) => {
+        expect(Object.keys(card).length).toBe(6);
+      });
+  });
+  test("400 : returns error message if passed invalid card id or id does not starts with `card` ", async () => {
+    return request(app)
+      .get("/cards/123")
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.message).toEqual("invalid id");
+      });
+  });
+  test("404 : returns error message gived id is not found within card data ", async () => {
+    return request(app)
+      .get("/cards/card006")
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.message).toEqual("card id not found !!");
       });
   });
 });
