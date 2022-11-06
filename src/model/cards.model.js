@@ -83,3 +83,5 @@ exports.fetchCardById = (cardId) => {
     });
   }
 };
+
+exports.addCardById = (cardId) => {};
