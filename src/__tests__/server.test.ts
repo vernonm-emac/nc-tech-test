@@ -7,15 +7,25 @@ describe('/cards', () => {
       return request(app).get('/cards').expect(200).then((response) => {
         expect(Array.isArray(response.body.cards)).toBe(true)
       })
-      })
+    })
+    // test("Should return a list of cards in the correct format", () => {
+    //   return request(app).get('/cards').expect(200).then((response) => {
+    //     expect(response.body.cards[0]).toEqual({
+    //         id: expect.any(String),
+    //         title: expect.any(String),
+    //         imageUrl: expect.any(String)
+            
+    //       })
+    //   })
+    // })
     })
 });
 
-test('returns matching card title', async () => {
-  const response = await request(app).get('/cards/card001')
+// test('returns matching card title', async () => {
+//   const response = await request(app).get('/cards/card001')
 
-  expect(response.status).toBe(200)
-  expect(response.body).toEqual(expect.objectContaining({
-    title: 'card 1 title',
-  }))
-})
+//   expect(response.status).toBe(200)
+//   expect(response.body).toEqual(expect.objectContaining({
+//     title: 'card 1 title',
+//   }))
+// })
