@@ -8,16 +8,16 @@ describe('/cards', () => {
         expect(Array.isArray(response.body.cards)).toBe(true)
       })
     })
-    // test("Should return a list of cards in the correct format", () => {
-    //   return request(app).get('/cards').expect(200).then((response) => {
-    //     expect(response.body.cards[0]).toEqual({
-    //         id: expect.any(String),
-    //         title: expect.any(String),
-    //         imageUrl: expect.any(String)
+    test("Should return a list of cards in the correct format", () => {
+      return request(app).get('/cards').expect(200).then((response) => {
+        expect(response.body.cards[0]).toEqual({
+            card_id: expect.any(String),
+            title: expect.any(String),
+            card_url: expect.any(String)
             
-    //       })
-    //   })
-    // })
+          })
+      })
+    })
     })
 });
 
