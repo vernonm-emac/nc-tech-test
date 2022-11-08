@@ -9,3 +9,14 @@ exports.getCards = (req, res, next) => {
       next(err);
     });
 };
+
+exports.getCardByID = (req, res, next) => {
+  const { cardId } = req.params;
+  selectCard(cardId)
+    .then((card) => {
+      res.status(200).send(card);
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
