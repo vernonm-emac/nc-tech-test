@@ -1,18 +1,24 @@
 const fs = require("fs/promises");
 const { resolve } = require("path");
-const { parseSizes, sayHello } = require("../utility");
+const { parseSizes, createId, checkId } = require("../utility");
 
 exports.selectAllCards = () => {
   const result = [];
-  return fs.readFile("./src/data/cards.json", "utf-8").then((data) => {
-    const cards = JSON.parse(data);
+  return fs
+    .readFile("./src/data/cards.json", "utf-8")
+    .then((data) => {
+      const cards = JSON.parse(data);
 
-    if (cards.length === 0) {
-      return Promise.reject({
-        status: 404,
-        msg: "No cards found",
-      });
-    } else {
+      if (cards.length === 0) {
+        return Promise.reject({
+          status: 404,
+          msg: "No cards found",
+        });
+      } else {
+        return cards;
+      }
+    })
+    .then((cards) => {
       return fs.readFile("./src/data/templates.json", "utf-8").then((data) => {
         const templates = JSON.parse(data);
         for (let i in cards) {
@@ -28,11 +34,19 @@ exports.selectAllCards = () => {
         }
         return result;
       });
-    }
-  });
+    })
+    .catch((err) => {
+      return Promise.reject(err);
+    });
 };
 
 exports.selectCard = (cardId) => {
+  if (!checkId(cardId)) {
+    return Promise.reject({
+      status: 400,
+      msg: "Invalid card ID",
+    });
+  }
   return this.selectAllCards()
     .then((cards) => {
       const card = cards.find((card) => {
@@ -66,8 +80,23 @@ exports.selectCard = (cardId) => {
             card.base_price = cards[i].basePrice;
           }
         }
-
         return card;
       });
+    })
+    .catch((err) => {
+      return Promise.reject(err);
     });
+};
+
+exports.insertCard = (title, imageUrl, base_price, availableSizes) => {
+  return this.selectAllCards().then((cards) => {
+    const ids = [];
+    for (let i in cards) {
+      ids.push(cards[i].card_id.substring(4));
+    }
+
+    const newId = Math.max(...ids) + 1;
+    const paddedId = newId.toString().padStart(3, "0");
+    return "card" + paddedId;
+  });
 };

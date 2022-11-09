@@ -1,4 +1,8 @@
-const { selectCard, selectAllCards } = require("../models/cardsModel");
+const {
+  selectCard,
+  selectAllCards,
+  insertCard,
+} = require("../models/cardsModel");
 
 exports.getCards = (req, res, next) => {
   selectAllCards()
@@ -15,6 +19,18 @@ exports.getCardByID = (req, res, next) => {
   selectCard(cardId)
     .then((card) => {
       res.status(200).send(card);
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
+exports.postCard = (req, res, next) => {
+  const { title, imageUrl, card_id, base_price, availableSizes } = req.body;
+  insertCard(title, imageUrl, card_id, base_price, availableSizes)
+    .then((card) => {
+   
+      res.status(201).send(card);
     })
     .catch((err) => {
       next(err);

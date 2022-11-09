@@ -72,4 +72,22 @@ describe("tests for get card by id", () => {
   it("should return a 404 error if the path is incorrect", () => {
     return request(app).get("/card/card999").expect(404);
   });
+  it("should return a 400 error if the card id doesn't follow correct format", () => {
+    return request(app).get("/cards/crd001").expect(400);
+  });
+});
+
+describe("test for post card", () => {
+  it("should return a 201 status", () => {
+    return request(app)
+      .post("/cards")
+      .send({
+        title: "test",
+        imageUrl: "test",
+        card_id: "test",
+        base_price: 1,
+        availableSizes: ["sm", "md", "lg", "gt"],
+      })
+      .expect(201);
+  });
 });
