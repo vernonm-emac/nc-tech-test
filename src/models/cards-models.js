@@ -5,6 +5,9 @@ const { createCardResponse } = require('./models-helpers')
 
 exports.fetchCardById = (cardId) => {
   // console.log('----- fetchCardById: ' + cardId)
+  const regex = new RegExp(/^card(\d){1,}$/)
+  if (!regex.test(cardId)) return Promise.reject({ status: 400, message: `invalid card id: ${cardId}` })
+
   for (card of cards) {
     if (card.id === cardId) {
       const responseCard = createCardResponse(card)

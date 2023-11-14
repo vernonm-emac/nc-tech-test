@@ -76,6 +76,6 @@ describe.only('GET /cards/:cardId', () => {
     const cardId = 'not-a-card'
     const response = await request(app).get(`/cards/${cardId}`)
     expect(response.status).toBe(400)
-    // expect(response.body.msg).toBe(`invalid card id: ${cardId}`)
+    expect(response.body.msg).toBe(`invalid card id: ${cardId}`)
   })
 })
