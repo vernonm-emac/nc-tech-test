@@ -10,14 +10,14 @@ describe('GET /cards/:cardId', () => {
     response = await request(app).get(`/cards/${cardId}`)
     expect(response.status).toBe(200)
     expect(response.body).toEqual(expect.objectContaining({
-      title: 'card 1 title',
+      id: cardId,
     }))
 
     cardId = 'card002'
     response = await request(app).get(`/cards/${cardId}`)
     expect(response.status).toBe(200)
     expect(response.body).toEqual(expect.objectContaining({
-      title: 'card 2 title',
+      id: cardId,
     }))
   })
 })
