@@ -1,11 +1,23 @@
 import * as request from 'supertest'
 import { app } from '../server'
 
-test('returns matching card title', async () => {
-  const response = await request(app).get('/cards/card001')
+describe('GET /cards/:cardId', () => {
+  test('200: responds with card object with matching cardID', async () => {
+    let response;
+    let cardId;
 
-  expect(response.status).toBe(200)
-  expect(response.body).toEqual(expect.objectContaining({
-    title: 'card 1 title',
-  }))
+    cardId = 'card001'
+    response = await request(app).get(`/cards/${cardId}`)
+    expect(response.status).toBe(200)
+    expect(response.body).toEqual(expect.objectContaining({
+      title: 'card 1 title',
+    }))
+
+    cardId = 'card002'
+    response = await request(app).get(`/cards/${cardId}`)
+    expect(response.status).toBe(200)
+    expect(response.body).toEqual(expect.objectContaining({
+      title: 'card 2 title',
+    }))
+  })
 })
