@@ -1,7 +1,7 @@
 const request = require('supertest')
 const app = require('../server')
 
-describe('GET /cards/:cardId', () => {
+describe.only('GET /cards/:cardId', () => {
   test('200: responds with card object with matching cardID', async () => {
     let response;
     let cardId;

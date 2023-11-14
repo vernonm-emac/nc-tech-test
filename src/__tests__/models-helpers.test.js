@@ -1,4 +1,4 @@
-const { getImageUrl } = require('../models/models-helpers')
+const { getImageUrl, createCardResponse } = require('../models/models-helpers')
 
 describe('getImageUrl', () => {
   test('given an invalid template id return false', () => {
@@ -98,5 +98,38 @@ describe('createOutputCard', () => {
     ]
     const result = createCardResponse(card)
     expect(result.availableSizes).toEqual(expected)
+  })
+  test('given a valid card object return a response object with the appropriate imageUrl property', () => {
+    const card = {
+      "id": "card001",
+      "title": "card 1 title",
+      "sizes": [
+        "sm",
+        "md",
+        "gt"
+      ],
+      "basePrice": 200,
+      "pages": [
+        {
+          "title": "Front Cover",
+          "templateId": "template001"
+        },
+        {
+          "title": "Inside Left",
+          "templateId": "template002"
+        },
+        {
+          "title": "Inside Right",
+          "templateId": "template003"
+        },
+        {
+          "title": "Back Cover",
+          "templateId": "template004"
+        }
+      ]
+    }
+    const expected = '/front-cover-portrait-1.jpg'
+    const result = createCardResponse(card)
+    expect(result.imageUrl).toBe(expected)
   })
 })
