@@ -11,4 +11,5 @@ exports.fetchCardById = (cardId) => {
       return Promise.resolve(responseCard)
     }
   }
+  return Promise.reject({status: 404, message: `card ${cardId} not found`})
 }

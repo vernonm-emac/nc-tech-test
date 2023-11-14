@@ -8,4 +8,7 @@ exports.getCardById = (req, res) => {
   .then((card) => {
     res.status(200).send(card)
   })
+  .catch((err) => {
+    res.status(err.status).send({msg: err.message})
+  })
 }

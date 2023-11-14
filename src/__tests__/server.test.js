@@ -64,4 +64,18 @@ describe.only('GET /cards/:cardId', () => {
     expect(response.status).toBe(200)
     expect(response.body.imageUrl).toBe(expected)
   })
+
+  test('404: card with given id not found', async () => {
+    const cardId = 'card100'
+    const response = await request(app).get(`/cards/${cardId}`)
+    expect(response.status).toBe(404)
+    expect(response.body.msg).toBe(`card ${cardId} not found`)
+  })
+
+  test('400: given card ID not valid', async () => {
+    const cardId = 'not-a-card'
+    const response = await request(app).get(`/cards/${cardId}`)
+    expect(response.status).toBe(400)
+    // expect(response.body.msg).toBe(`invalid card id: ${cardId}`)
+  })
 })
