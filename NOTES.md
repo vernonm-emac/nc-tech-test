@@ -1,1 +1,1 @@
-Please add any additional notes here…
+I've decided to convert the project into javascript as I'm much more familiar with it than typescript.

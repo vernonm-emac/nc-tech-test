@@ -1,5 +1,5 @@
-import * as request from 'supertest'
-import { app } from '../server'
+const request = require('supertest')
+const app = require('../server')
 
 describe('GET /cards/:cardId', () => {
   test('200: responds with card object with matching cardID', async () => {
