@@ -1,9 +1,8 @@
 const templates = require('../data/templates.json')
 
 getImageUrl = (templateId) => {
-  console.log('fetch img url')
+  // console.log('----- get img url')
   for (template of templates) {
-    console.log(template.id +" / "+templateId)
     if (template.id === templateId) return template.imageUrl
   }
   return false
@@ -27,7 +26,7 @@ createCardResponse = (card) => {
 
   const newCard = {
     title: card.title,
-    imageUrl: 'imgurl',
+    imageUrl: getImageUrl(card.pages[0].templateId),
     card_id: card.id,
     availableSizes: availableSizes,
     base_price: card.basePrice,
