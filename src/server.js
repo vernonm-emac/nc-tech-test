@@ -7,11 +7,10 @@ const app = express()
 app.set('json spaces', 2);
 
 app.get('/cards', async () => {
-  getCardById()
 })
 
-app.get('/cards/:cardId/:sizeId?', () => {
-  // respond with card by id
+app.get('/cards/:cardId/:sizeId?', async (req, res) => {
+  getCardById(req, res)
 })
 
 module.exports = app
