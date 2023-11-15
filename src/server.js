@@ -1,6 +1,6 @@
-import * as express from "express";
+const express = require ("express");
 
-export const app = express()
+const app = express();
 
 app.set('json spaces', 2);
 
@@ -11,3 +11,8 @@ app.get('/cards', async () => {
 app.get('/cards/:cardId/:sizeId?', () => {
   // respond with card by id
 })
+
+
+
+module.exports = {app};
+

@@ -1,5 +1,6 @@
-import * as request from 'supertest'
-import { app } from '../server'
+const request = require("supertest");
+const { app } = require('../server')
+
 
 test('returns matching card title', async () => {
   const response = await request(app).get('/cards/card001')
