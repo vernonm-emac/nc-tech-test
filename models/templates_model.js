@@ -1,8 +1,8 @@
 const fs = require("fs/promises");
 
-function retrieveAllCards() {
+function retrieveAllTemplates() {
   return fs
-    .readFile("src/data/cards.json", "utf-8")
+    .readFile("src/data/templates.json", "utf-8")
     .then((fileContents) => {
       return fileContents;
     })
@@ -11,4 +11,4 @@ function retrieveAllCards() {
     });
 }
 
-module.exports = { retrieveAllCards };
+module.exports = { retrieveAllTemplates };
