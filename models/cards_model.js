@@ -4,7 +4,8 @@ function retrieveAllCards() {
   return fs
     .readFile("src/data/cards.json", "utf-8")
     .then((fileContents) => {
-      return fileContents;
+      const cards = JSON.parse(fileContents);
+      return cards;
     })
     .catch((err) => {
       console.log(err);

@@ -6,17 +6,18 @@ describe("/cards", () => {
     return request(app)
       .get("/cards")
       .expect(200)
-      .then(({ text }) => {
-        expect(JSON.parse(text).length).toEqual(3);
+      .then(({ body }) => {
+        console.log(body, "response in test");
+
+        expect(body.length).toEqual(3);
       });
   });
-  test("GET: all items in teh returned array have the expected keys", () => {
+  test("GET: all items in the returned array have the expected keys", () => {
     return request(app)
       .get("/cards")
       .expect(200)
-      .then(({ text }) => {
-        const cardsArray = JSON.parse(text);
-        cardsArray.forEach((card) => {
+      .then(({ body }) => {
+        body.forEach((card) => {
           expect(card).toHaveProperty("title");
           expect(card).toHaveProperty("imageUrl");
           expect(card).toHaveProperty("card_id");
@@ -24,6 +25,14 @@ describe("/cards", () => {
       });
   });
 });
+
+/*
+title from cards.json( as "title")
+
+imageUrl from templates.json ( pages[0].templateId then find that template in tempaltes.json)
+
+card_id from cards.json (as "id")
+*/
 
 // test("returns matching card title", async () => {
 //   const response = await request(app).get("/cards/card001");
