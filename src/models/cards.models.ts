@@ -18,11 +18,5 @@ export const fetchCards = async () => {
         })
     }
 
-    // const transformedCards = parsedCards.map((card) => ({
-    //     "title": card.title,
-    //     "imageUrl": firstPageImage,
-    //     "card_id": card.id,
-    // }));
-
     return transformedCards;
 }
