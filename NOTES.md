@@ -14,3 +14,8 @@ The second challenge was getting the correct form of Promises/async to match Typ
 I solved the fs.readFile dilemma by using __dirname after figuring it was a problem with the pathing. I now have the data being sent through.
 
 I put in a new test to check the functionality of '/cards'. After parsing the JSON result, I confirmed that it matched the shape of the JSON object.
+
+## third commit
+However, this isn't the format that we want the '/cards' api to return it in, so we need to adjust the data a bit, keeping the previous test the same but only looking for the title.
+We need to grab the images from the templates file and change the id property to card_id and then only return an object that has the necessary information.
+A little bit of jiggling around the data from the templates file and data file and that's successful!
