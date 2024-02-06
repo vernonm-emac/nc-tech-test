@@ -19,3 +19,8 @@ I put in a new test to check the functionality of '/cards'. After parsing the JS
 However, this isn't the format that we want the '/cards' api to return it in, so we need to adjust the data a bit, keeping the previous test the same but only looking for the title.
 We need to grab the images from the templates file and change the id property to card_id and then only return an object that has the necessary information.
 A little bit of jiggling around the data from the templates file and data file and that's successful!
+
+## fourth major commit: Error Handling
+I want to consider error handling. As a GET request without any queries, there's limited ways for users to submit a bad request or even a 'not found' error on the endpoint. However this seems like a good time to set up general error handling so I have added that to server.js and an error handler. 
+
+This initial error handling setup provides scaleability and easy structure for errors further down the line. Currently it supports a route-not-found 404 and a 500 error that will only be reached in case of a problem with the server.
