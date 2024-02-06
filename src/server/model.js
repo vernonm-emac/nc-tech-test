@@ -17,7 +17,8 @@ exports.fetchCards = () => {
 
 exports.fetchCard = (cardId) => {
     const card = rawCards.find(card => {
-        return card.id = cardId
+        return card.id === cardId
     })
+    if(!card){return {status:404,message:'Card doesn\'t exist'}}
     return card
 }

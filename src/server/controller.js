@@ -7,6 +7,12 @@ exports.getCards = (req,res,next) => {
 
 exports.getCard = (req,res,next) => {
     const {cardId} = req.params
+    const regex = /^card\d{3}$/g
+    if(!regex.test(cardId)){
+        next({status:400,message:'invalid id'})
+    }
     const card = fetchCard(cardId)
-    res.status(200).send({card})
+    if(card.status){
+        next(card)
+    }else{res.status(200).send({card})}
 }
