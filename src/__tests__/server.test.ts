@@ -6,15 +6,21 @@ import exp from "constants";
 import { Card, FormattedCard } from "../types";
 import { formatCardsResponse } from "../utils/utils";
 
-test.skip("returns matching card title", async () => {
-    const response = await request(app).get("/cards/card001");
-
-    expect(response.status).toBe(200);
-    expect(response.body).toEqual(
-        expect.objectContaining({
-            title: "card 1 title",
-        })
-    );
+describe("/cards/:cardId", () => {
+    test("GET:200 returns a card matching the given card id as params", async () => {
+        const response = await request(app).get("/cards/card001");
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual(
+            expect.objectContaining({
+                title: "card 1 title",
+            })
+        );
+    });
+    test("GET:404 returns a message if the card id is not found", async () => {
+        const response = await request(app).get("/cards/123");
+        expect(response.status).toBe(404);
+        expect(response.text).toBe("Card not found");
+    });
 });
 
 describe("/cards", () => {
