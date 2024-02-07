@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { readFile } from "fs/promises";
+import { readCards } from "../models/cards.models";
 
 export const getCards = async (req: Request, res: Response) => {
     try {
-        const data = await readFile("src/data/cards.json", "utf-8");
-        res.json({ cards: JSON.parse(data) });
+        const cards = await readCards();
+        res.json({ cards });
     } catch (error) {
         res.status(500).send("There was an error getting the cards.");
     }
