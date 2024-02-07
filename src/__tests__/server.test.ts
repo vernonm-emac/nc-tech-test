@@ -49,6 +49,20 @@ describe("formatCardsResponse function", () => {
             expect(typeof card.card_id).toBe("string");
         }
     });
+    test("the card objects have the correct image urls", () => {
+        const formattedCards: FormattedCard[] = formatCardsResponse(
+            cards,
+            templates
+        );
+        const cardOne = formattedCards.find(
+            (card) => card.card_id === "card001"
+        );
+        const cardTwo = formattedCards.find(
+            (card) => card.card_id === "card002"
+        );
+        expect(cardOne?.imageUrl).toBe("/front-cover-portrait-1.jpg");
+        expect(cardTwo?.imageUrl).toBe("/front-cover-portrait-2.jpg");
+    });
     test("the input array is not mutated", () => {
         const originalCards = [...cards];
         formatCardsResponse(cards, templates);

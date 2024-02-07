@@ -5,7 +5,13 @@ import { formatCardsResponse } from "../utils/utils";
 export const readCards = async (): Promise<FormattedCard[]> => {
     const data = await readFile("src/data/cards.json", "utf-8");
     const cards: Card[] = JSON.parse(data);
+
+    // get template id
     
+    // lookup template data
+
+    // add template data to card object
+
     const templates: Template[] = await readTemplates();
 
     const formattedCards = formatCardsResponse(cards, templates);
