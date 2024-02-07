@@ -1,5 +1,5 @@
 import { readFileSync } from "fs";
-import { fetchImageUrlById } from "./template.model";
+import { fetchImageUrlById } from "./templates.model";
 
 type CardResponse = {
     title: string;
