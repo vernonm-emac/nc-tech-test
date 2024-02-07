@@ -14,7 +14,7 @@ test.skip("returns matching card title", async () => {
 });
 
 describe("/cards", () => {
-    test("GET:200 returns a list of cards", async () => {
+    test("GET:200 returns an array of card objects", async () => {
         const response = await request(app).get("/cards");
         expect(response.status).toBe(200);
         expect(response.body.cards).toHaveLength(3);

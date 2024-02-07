@@ -6,7 +6,6 @@ export const getCards = async (req: Request, res: Response) => {
         const data = await readFile("src/data/cards.json", "utf-8");
         res.json({ cards: JSON.parse(data) });
     } catch (error) {
-        console.log(error);
-        // TODO handle error
+        res.status(500).send("There was an error getting the cards.");
     }
 };
